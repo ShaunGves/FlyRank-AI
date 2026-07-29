@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Referral Opportunity in Search Content — Research Paper</title>
+<style>
+  :root{
+    --paper:#faf8f3;
+    --ink:#1c1a17;
+    --ink-soft:#4a453d;
+    --rule:#d8d2c4;
+    --accent:#8a6d3b;
+    --accent-soft:#ede4d0;
+    --mono:#6b6355;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.65;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:6rem 1.5rem 8rem;
+  }
+  .kicker{
+    font-family:"Courier New",monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mono);
+    margin-bottom:1.2rem;
+  }
+  h1{
+    font-size:2.5rem;
+    line-height:1.15;
+    margin:0 0 1.5rem;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .byline{
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    margin-bottom:3rem;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:2rem;
+  }
+  .byline a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);}
+  .abstract{
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+    padding:1.6rem 1.8rem;
+    margin:0 0 3.5rem;
+    font-size:0.98rem;
+  }
+  .abstract-label{
+    font-family:"Courier New",monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:0.6rem;
+    display:block;
+  }
+  section{margin-bottom:3.5rem;}
+  h2{
+    font-size:1.05rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--accent);
+    margin:0 0 1.4rem;
+    padding-bottom:0.6rem;
+    border-bottom:1px solid var(--rule);
+  }
+  h2 .num{
+    font-family:"Courier New",monospace;
+    color:var(--mono);
+    margin-right:0.6rem;
+  }
+  p{margin:0 0 1.1rem; font-size:1.02rem;}
+  ul, ol{margin:0 0 1.1rem; padding-left:1.4rem;}
+  li{margin-bottom:0.5rem;}
+  .callout{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    border-left:2px solid var(--rule);
+    padding-left:1rem;
+    margin:1.4rem 0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.5rem 0;
+    font-size:0.95rem;
+  }
+  th,td{
+    text-align:left;
+    padding:0.65rem 0.8rem;
+    border-bottom:1px solid var(--rule);
+  }
+  th{
+    font-family:"Courier New",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--mono);
+    font-weight:600;
+  }
+  tr:last-child td{border-bottom:none;}
+  .metric{font-variant-numeric:tabular-nums;}
+  .chart-box{
+    background:#fff;
+    border:1px solid var(--rule);
+    padding:1.5rem;
+    text-align:center;
+    margin:1.5rem 0;
+  }
+  .chart-box img{max-width:100%; height:auto; display:block; margin:0 auto;}
+  .chart-caption{
+    font-size:0.85rem;
+    color:var(--mono);
+    margin-top:0.8rem;
+    font-family:"Courier New",monospace;
+  }
+  .rec-list{list-style:none; padding:0; counter-reset:rec;}
+  .rec-list li{
+    counter-increment:rec;
+    padding:1rem 0 1rem 2.6rem;
+    position:relative;
+    border-bottom:1px solid var(--rule);
+  }
+  .rec-list li::before{
+    content:counter(rec);
+    position:absolute;
+    left:0;
+    top:1rem;
+    font-family:"Courier New",monospace;
+    color:var(--accent);
+    font-weight:700;
+    font-size:0.9rem;
+  }
+  code{
+    background:var(--accent-soft);
+    padding:0.1rem 0.4rem;
+    font-family:"Courier New",monospace;
+    font-size:0.9em;
+    border-radius:2px;
+  }
+  .caveat-box{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:1.4rem 1.6rem;
+    margin-top:1.5rem;
+  }
+  .caveat-box h3{
+    margin:0 0 0.6rem;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--mono);
+  }
+  footer{
+    border-top:1px solid var(--rule);
+    padding-top:2rem;
+    margin-top:5rem;
+    font-size:0.88rem;
+    color:var(--mono);
+  }
+  footer a{color:var(--accent);}
+  .repro-links{list-style:none;padding:0;margin:0.8rem 0 0;}
+  .repro-links li{margin-bottom:0.5rem;}
+  .repro-links a{
+    font-family:"Courier New",monospace;
+    font-size:0.88rem;
+    color:var(--accent);
+    text-decoration:none;
+  }
+  .repro-links a:hover{text-decoration:underline;}
+  @media (max-width:600px){
+    .wrap{padding:3rem 1.2rem 5rem;}
+    h1{font-size:1.9rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">FlyRank ML Internship — Search Intelligence Capstone</div>
+  <h1>AI Referral Opportunity: Which Content Patterns Correlate with AI‑Referred Search Traffic?</h1>
+  <div class="byline">
+    By <strong>Shaun Gonsalves</strong> &nbsp;·&nbsp;
+    Repository: <a href="https://github.com/ShaunGves/FlyRank-AI" target="_blank">github.com/ShaunGves/FlyRank-AI</a>
+  </div>
+
+  <div class="abstract">
+    <span class="abstract-label">Abstract</span>
+    <p style="margin:0;">
+      This paper asks which observable content and search signals are associated with pages
+      receiving AI referral traffic, and whether that association can be turned into a ranked
+      review list for a content team. Using FlyRank's pseudonymized search warehouse for a
+      mid-panel month, I built a small feature set from Google Search Console and GA4 signals and
+      compared a simple impression-threshold baseline against a logistic regression ranking model.
+      The model produced a modest but real improvement over the baseline, while a deliberate leakage
+      test confirmed the gain was not an artifact of circular features. Because AI-referral sessions
+      are sparse, the result is best read as a directional, decision-support ranking rather than a
+      confident predictive model — a starting point for human review, not a guarantee of AI visibility gains.
+    </p>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>Introduction</h2>
+    <p>
+      AI-powered search tools increasingly send referral traffic to content that they judge worth
+      citing, quoting, or summarizing. Content teams currently have almost no visibility into which
+      of their pages already earn some of this traffic, or which under-performing pages might be
+      easy wins if restructured. This work supports a specific decision: <strong>given limited review
+      capacity, which pages should a content or SEO team look at first when trying to improve AI
+      visibility?</strong> The output is not a guarantee that any specific page will gain AI traffic —
+      it is a ranked shortlist that replaces guesswork with an evidence-based starting point.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Data</h2>
+    <p>
+      This analysis uses FlyRank's pseudonymized internship warehouse release
+      (<code>flyrank_pseudonymized_warehouse_release_v20260703</code>), accessed via the gated
+      Hugging Face dataset <code>FlyRank/internship-warehouse</code>. The primary table is
+      <code>fact_content_daily_performance</code>, a daily fact table keyed by client, content item,
+      and report date.
+    </p>
+    <p>
+      Development and validation were performed on a single mid-panel month,
+      <code>month=2026-03</code>, deliberately avoiding the dataset's final sealed month (which is
+      reserved as an unseen test window for future-looking labels and was not used here). The raw
+      slice for this month contains <strong>9,841,378</strong> daily fact rows spanning
+      <strong>2026-03-01</strong> through <strong>2026-03-31</strong>. After removing rows with
+      missing values in the modeling columns, <strong>2,082,695</strong> rows remained for analysis.
+    </p>
+    <p><strong>Excluded from this work, and why:</strong></p>
+    <ul>
+      <li>Raw client names, domains, URLs, titles, and queries — never present in the release; all
+        identifiers are pseudonymized hash IDs used only for joining and grouping.</li>
+      <li>FlyRank's own product-computed fields (<code>health_score</code>, <code>priority_score</code>,
+        <code>action_type</code>) — excluded to avoid a circular result, where a model simply learns
+        to reproduce an existing rule instead of discovering signal from raw data.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Methodology</h2>
+    <p>
+      Because only a small fraction of content items in the warehouse show any AI-referral sessions,
+      this problem was framed as a <strong>scoring / ranking task</strong>, not binary classification.
+      Training a classifier on such a rare positive class risks a model that looks accurate on paper
+      while being practically unreliable.
+    </p>
+    <p><strong>Label / proxy:</strong> <code>sessions_ai &gt; 0</code>, used to validate whether a
+      ranking of pages by predicted score correlates with observed AI referral activity — not treated
+      as a confident ground truth. In this month's data, only <strong>0.23%</strong> of rows carry a
+      positive label — direct confirmation that AI referral activity is extremely sparse, and a key
+      reason this is framed as ranking rather than classification.</p>
+    <p><strong>Features</strong> (all observable independent of the outcome being ranked):</p>
+    <ul>
+      <li><code>gsc_impressions</code> — Search Console impressions, logged daily.</li>
+      <li><code>gsc_avg_position</code> — average search ranking position.</li>
+      <li><code>ga4_sessions</code> — total analytics sessions.</li>
+      <li><code>ga4_engaged_sessions</code> — sessions with meaningful engagement.</li>
+    </ul>
+    <p><strong>Baseline:</strong> a single-rule flag — pages with <code>gsc_impressions</code> above
+      the month's median are marked as opportunities.</p>
+    <p><strong>Models compared:</strong> Logistic Regression (interpretable, probability-based ranking)
+      and Random Forest (to test whether a more flexible, non-linear method meaningfully improves
+      ranking quality).</p>
+    <p><strong>Split design:</strong> the primary comparison uses a random 70/30 train/test split.
+      Because the data is at a content-item-per-day grain, the same page can appear on multiple days,
+      so a purely random split risks letting the model see a page's pattern in training and again in
+      testing. To check this, the honest logistic regression result was re-run under a
+      <strong>grouped split</strong> — grouped by <code>content_hash_id</code>, so no single page's
+      rows can appear in both the train and test sets.</p>
+    <p><strong>Leakage audit:</strong> as a deliberate test in an earlier notebook, <code>sessions_ai</code>
+      itself (the source of the label) was added as a feature. The score jumped sharply toward a
+      perfect result, confirming leakage — this column was removed and excluded from every model
+      reported below. The final feature set was re-checked to confirm it contains no FlyRank
+      product-computed fields (<code>health_score</code>, <code>priority_score</code>,
+      <code>action_type</code>) and no direct copy of the label.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Results</h2>
+    <p>The table below compares the baseline rule against two models on the same random 70/30 test split, using ROC AUC.</p>
+    <table>
+      <thead>
+        <tr><th>Method</th><th>ROC AUC</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Baseline (impressions &gt; median)</td><td class="metric">0.697</td></tr>
+        <tr><td>Logistic regression</td><td class="metric">0.782</td></tr>
+        <tr><td>Random forest</td><td class="metric">0.948</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Both models clear the fixed-threshold baseline by a wide margin. The random forest's high score
+      (0.948) is notable, but should be read cautiously: with a rare positive class and a
+      content-item-per-day grain, a flexible model can partly pick up page-specific patterns rather
+      than generalizable signal — this is examined directly below.
+    </p>
+
+    <p><strong>Honest validation — grouped split.</strong> Because the same content page can appear on
+      multiple days in this dataset, a random split risks letting the model see a page in both training
+      and testing. Re-running the logistic regression under a split grouped by <code>content_hash_id</code>
+      (so a page's rows can never appear in both sets) gives a direct before/after comparison:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Split design</th><th>ROC AUC (Logistic Regression)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Random split (before)</td><td class="metric">0.7818</td></tr>
+        <tr><td>Grouped by content page (after)</td><td class="metric">0.7834</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The two scores are nearly identical, which is a reassuring result: it suggests the logistic
+      regression's performance was not meaningfully inflated by page repetition across days, and the
+      model is picking up genuine signal rather than memorizing individual pages.
+    </p>
+
+    <div class="chart-box">
+      <img src="reason_code_distribution.png" alt="Distribution of reason codes across scored pages">
+      <div class="chart-caption">Fig. 1 — Reason-code distribution across 2,082,695 scored page-days, month=2026-03.</div>
+    </div>
+
+    <p><strong>What the model leans on.</strong> Random forest feature importances place
+      <code>ga4_sessions</code> highest (0.354), followed by <code>gsc_avg_position</code> (0.288),
+      <code>gsc_impressions</code> (0.265), and <code>ga4_engaged_sessions</code> (0.093) lowest. This
+      suggests overall session volume and ranking position carry more separating power than raw
+      impression counts or engaged-session counts alone.
+    </p>
+    <p><strong>Error analysis.</strong> On this test split, the random forest produced <strong>zero
+      confident false positives</strong> (cases where it predicted &gt;50% probability of AI traffic
+      but the page had none). Combined with the extremely rare positive rate (0.23%), this indicates the
+      model is being conservative rather than over-flagging — consistent with a sparse-signal setting
+      where the model has learned to reserve high-confidence scores for a small number of genuinely
+      strong candidates.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>Limitations &amp; Honest Framing</h2>
+    <div class="caveat-box">
+      <h3>What this work can say</h3>
+      <p style="margin:0;">Certain observable content and search signals are <em>associated</em> with
+        pages that already receive AI referral sessions, and a simple model can rank pages by this
+        association better than a fixed threshold rule.</p>
+    </div>
+    <div class="caveat-box" style="margin-top:1rem;">
+      <h3>What this work cannot say</h3>
+      <ul style="margin:0;">
+        <li>It cannot claim that editing a page will <em>cause</em> AI referral traffic to increase —
+          that requires a controlled experiment, not observational data.</li>
+        <li>It cannot describe or predict how any specific AI platform's citation or ranking logic works.</li>
+        <li>Results are validated on a single month and a single unbalanced client panel; they may
+          not generalize across time or across clients with less tracking history.</li>
+        <li>AI-referral sessions are sparse enough that any single ranking should be treated as
+          directional, not a confident forecast.</li>
+      </ul>
+    </div>
+    <div class="caveat-box" style="margin-top:1rem;">
+      <h3>Intended use, human review, and no-go cases</h3>
+      <p style="margin:0 0 0.8rem;"><strong>Intended for:</strong> a content strategist or SEO manager
+        with limited review time, deciding which pages to look at first. <strong>Stops being valid</strong>
+        outside <code>month=2026-03</code> without re-validation, or if treated as a guarantee rather
+        than a hypothesis.</p>
+      <p style="margin:0 0 0.8rem;"><strong>Before acting, a human should check:</strong> whether the
+        page's topic is still relevant to the business; whether the recommended change fits the
+        page's actual content type; and whether traffic/engagement figures reflect a one-off spike
+        rather than sustained behavior.</p>
+      <p style="margin:0;"><strong>Should never be automated:</strong> automatically rewriting or
+        publishing content changes, deleting or pruning pages, or presenting the opportunity score as
+        a public-facing claim about a page's quality. This playbook only prioritizes review.</p>
+    </div>
+    <div class="caveat-box" style="margin-top:1rem;">
+      <h3>Monitoring and retrain triggers</h3>
+      <p style="margin:0;">Signals that this playbook has gone stale: the data month drifting far from
+        current traffic patterns; a significant change in site content mix; new tracking gaps (e.g.
+        GA4 availability dropping for previously-tracked pages); or a drop in the grouped-split AUC on
+        a freshly validated month. Recommended trigger: re-run the scoring pipeline monthly, or
+        immediately after any major site or tracking change, and re-check the honest AUC before
+        trusting a new ranked queue.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span>Ranked Recommendations</h2>
+    <p>
+      Each page-day in the scored dataset receives a reason code based on where it sits on visibility
+      and engagement, mapped directly to a suggested action:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Reason code</th><th>Count</th><th>Suggested action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>visible_engaged_page</code></td><td class="metric">21,134</td><td>Review for AI structure</td></tr>
+        <tr><td><code>high_visibility_low_engagement</code></td><td class="metric">690,420</td><td>Improve engagement, then review</td></tr>
+        <tr><td><code>high_engagement_low_visibility</code></td><td class="metric">3,975</td><td>Monitor</td></tr>
+        <tr><td><code>low_priority</code></td><td class="metric">1,367,166</td><td>No action</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The top tier — <code>visible_engaged_page</code> — represents the clearest starting point:
+      pages with both strong search visibility and strong engagement, sharing a profile with pages
+      that already show AI referral activity elsewhere in the dataset. Recommended actions for this
+      tier: add clear, self-contained definitions or FAQ-style blocks near the top of the page, and
+      strengthen explicit source attribution, since these structural traits are believed to make a
+      page easier for AI systems to cite. This is a prioritized starting point for human review, not
+      a guarantee of AI traffic gain.
+    </p>
+    <p>
+      One practical caveat surfaced during review: the same content page can appear many times in a
+      day-level ranked list, since the underlying grain is content-item-per-day. A team using this
+      queue in practice should first aggregate to one row per page (e.g., by taking the max or mean
+      score across the month) so the reviewed list reflects distinct pages rather than one strong
+      page's repeated daily entries.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span>Reproducibility</h2>
+    <p>All notebooks behind this paper are available in the project repository:</p>
+    <ul class="repro-links">
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w01_research_question.ipynb" target="_blank">work/notebooks/w01_research_question.ipynb</a> — research question and lane framing</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w02_ml_task_framing.ipynb" target="_blank">work/notebooks/w02_ml_task_framing.ipynb</a> — ML task type, target, and success metric</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w03_data_contract.ipynb" target="_blank">work/notebooks/w03_data_contract.ipynb</a> — data contract, verification queries, leakage test</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w04_baseline_score.ipynb" target="_blank">work/notebooks/w04_baseline_score.ipynb</a> — signal checks and baseline rule</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w05_model.ipynb" target="_blank">work/notebooks/w05_model.ipynb</a> — logistic regression and random forest vs. baseline</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w06_validation_audit.ipynb" target="_blank">work/notebooks/w06_validation_audit.ipynb</a> — grouped-split validation and claim audit</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/w07_action_playbook.ipynb" target="_blank">work/notebooks/w07_action_playbook.ipynb</a> — action playbook and exports</li>
+      <li><a href="https://github.com/ShaunGves/FlyRank-AI/blob/main/work/notebooks/capstone.ipynb" target="_blank">work/notebooks/capstone.ipynb</a> — full model, results, and recommendations</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>Acknowledgments &amp; data credit.</strong> Built on the FlyRank ML Internship dataset
+      — <a href="https://flyrank.ai" target="_blank">flyrank.ai</a>.</p>
+  </footer>
+
+</div>
+</body>
+</html>
