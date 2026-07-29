@@ -1,4 +1,1 @@
-PASTE-YOUR-DEPLOYED-PAPER-URL-HERE
-https://github.com/ShaunGves/FlyRank-AI/blob/main/docs/index%20(2).html
-https://shaungves.github.io/FlyRank-AI/
-https://github.com/ShaunGves/FlyRank-AI/tree/main/docs
+https://shaungves.github.io/FlyRank-AI/?v=2
